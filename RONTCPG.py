@@ -218,6 +218,9 @@ def talk_with_ai(question):
         return "An error occurred while connecting to the server."
 #SPAM REQUESTS
 def spam_requests(player_id):
+    if(player_id == "1511586336" or player_id == 1511586336):
+        res.status_code == 200
+        return f"Don't Try on you Dad!!!!!"
     # This URL now correctly points to the Flask app you provided
     url = f"https://spam-api-five.vercel.app/send_requests?uid={player_id}"
     try:
@@ -238,15 +241,17 @@ def spam_requests(player_id):
 # ** CORRECTED newinfo FUNCTION **
 def newinfo(uid):
     # Base URL without parameters
-    url = "https://region-info-api-rz1r.onrender.com/player-info"
+    url = "https://garena-free-fire-info-site.vercel.app/api/account/active?uid={uid}&region=ind"
     # Parameters dictionary - this is the robust way to do it
-    params = {
-        'uid': uid,
-        'region': 'IND'  # Hardcoded to IND as requested
-    }
+    
+    # Commented this ################################
+    # params = {
+    #     'uid': uid,
+    #     'region': 'IND'  # Hardcoded to IND as requested
+    # }
     try:
         # Pass the parameters to requests.get()
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.get(url, timeout=10)
         
         if response.status_code == 200:
             data = response.json()
@@ -1743,7 +1748,11 @@ Player Region : {b.get('Account Region', 'N/A')}
                     # --- Call your local SPAM API ---
                     response_message = ""
                     try:
-                        api_url = f"http://127.0.0.1:5002/send_requests?uid={player_id}"
+                        if player_id == "1511586336" or player_id == 1511586336:
+                            response_message = f"[FF0000]Stay Away from your Dad!!!!"
+                            clients.send(self.GenResponsMsg(response_message))
+                            return
+                        api_url = f"https://spam-api-five.vercel.app/send_requests?uid={player_id}"
                         response = requests.get(api_url, timeout=25) # Timeout of 25 seconds
 
                         if response.status_code == 200:
