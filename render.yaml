@@ -9,7 +9,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.16
-    disk:
-      name: data
-      mountPath: /opt/render/project/src/RONTCP_GUILD/logs
-      sizeGB: 1
