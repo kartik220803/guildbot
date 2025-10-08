@@ -312,7 +312,6 @@ def send_likes(uid, sender_name):
 [FFFFFF]Likes After : [00FF00]{likes_after}  
 [FFFFFF]Command Used by : [00FF00]{sender_name}  
 [C][B][11EAFD]‎━━━━━━━━━━━━
-[C][B][FFB300]For more likes, visit: [FFFFFF]supremeff.online[00FF00]
 [C][B][FFB300]Credits: [FFFFFF]KARTIK [00FF00]BOT!!
                 """
             # ^old one-> else:
@@ -324,7 +323,6 @@ def send_likes(uid, sender_name):
 
 [FFFFFF]You have already used your Daily Likes Limit
 [FFFFFF]Command Used by : [00FF00]{sender_name}
-[FFFFFF]For more likes visit : supremeff.online
 
 [C][B][FF0000]‎━━━━━━━━━━━━
 [C][B][FFB300]Credits: [FFFFFF]KARTIK [00FF00]BOT!!
@@ -348,7 +346,6 @@ Please check if the API is running correctly.
 [C][B][FF0000]━━━━━
 [FFFFFF]Like API Connection Failed!
 Please TRY AGAIN in 2 minutes!!
-For more likes visit : supremeff.online
 [FF0000]━━━━━
 """)
 #         return ("""
