@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rontcp-guild-bot
+    env: python
+    plan: free
+    buildCommand: cd RONTCP_GUILD && pip install -r requirements.txt
+    startCommand: cd RONTCP_GUILD && bash run_gbot_render.sh
+    autoDeploy: false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/RONTCP_GUILD/logs
+      sizeGB: 1
