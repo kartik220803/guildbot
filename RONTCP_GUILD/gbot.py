@@ -312,6 +312,7 @@ def send_likes(uid, sender_name):
 [FFFFFF]Likes After : [00FF00]{likes_after}  
 [FFFFFF]Command Used by : [00FF00]{sender_name}  
 [C][B][11EAFD]‎━━━━━━━━━━━━
+[C][B][FFB300]For more likes, visit: [FFFFFF]supremeff.online[00FF00]
 [C][B][FFB300]Credits: [FFFFFF]KARTIK [00FF00]BOT!!
                 """
             # ^old one-> else:
