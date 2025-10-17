@@ -277,7 +277,7 @@ def send_likes(uid, sender_name):
     try:
         # Attempt to connect to the local likes API
         likes_api_response = requests.get(
-            f"http://35.206.73.152:5000/like?uid={uid}&server_name=IND&batch_size=110",
+            f"https://delicate-corly-kartik220803-87560153.koyeb.app/like?uid={uid}&server_name=IND",
             timeout=15 # Add a timeout to prevent it from hanging
         )
         
