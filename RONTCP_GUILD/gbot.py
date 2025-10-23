@@ -278,9 +278,10 @@ def send_likes(uid, sender_name):
         # Attempt to connect to the local likes API
         likes_api_response = requests.get(
             f"https://159.65.148.100:443/like?uid={uid}&server_name=IND",
-            timeout=15 # Add a timeout to prevent it from hanging
+            timeout=15, # Add a timeout to prevent it from hanging
+            verify=False # Disable SSL verification for IP-based HTTPS endpoint
         )
-        
+        print("like url response", likes_api_response)
         # Check if the API request was successful
         if likes_api_response.status_code == 200:
             api_json_response = likes_api_response.json()
@@ -340,11 +341,16 @@ Please check if the API is running correctly.
                 
         return message
 
-    except requests.exceptions.RequestException:
+    except requests.exceptions.RequestException as e:
         # Handle network errors (e.g., API is not running at all)
-        return ("""
+        print(f"[ERROR] RequestException in send_likes(): {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return (f"""
 [C][B][FF0000]━━━━━
 [FFFFFF]Like API Connection Failed!
+Error: {type(e).__name__}
+Details: {str(e)}
 Please TRY AGAIN in 2 minutes!!
 [FF0000]━━━━━
 """)
@@ -356,7 +362,10 @@ Please TRY AGAIN in 2 minutes!!
 # """)
     except Exception as e:
         # Catch any other unexpected errors
-        return f"[FF0000]An unexpected error occurred: {str(e)}"
+        print(f"[ERROR] Unexpected exception in send_likes(): {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return f"[FF0000]An unexpected error occurred: {type(e).__name__}: {str(e)}"
 ####################################
 #CHECK ACCOUNT IS BANNED
 def check_banned_status(player_id):
@@ -1245,10 +1254,8 @@ class FF_CLIENT(threading.Thread):
                             self.GenResponsMsg(
                                 f"""[C][B]
 Welcome to [00ff00]KARTIK'S BOT[ffffff]!
-
 [C][B]
 To see the commands, just send: [00ff00]🗿/help🗿[ffffff]
-
 [C][B]
 Enjoy the bot!
 """
