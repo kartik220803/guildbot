@@ -241,7 +241,7 @@ def spam_requests(player_id):
 # ** CORRECTED newinfo FUNCTION **
 def newinfo(uid):
     # Base URL without parameters
-    url = f"https://team-xzy-ujjaiwal.vercel.app/player-info?uid={uid}&region=ind"
+    url = f"https://ffinfo-mu.vercel.app/player-info?uid={uid}&region=ind"
     # Parameters dictionary - this is the robust way to do it
     
     # Commented this ################################
@@ -255,7 +255,7 @@ def newinfo(uid):
         
         if response.status_code == 200:
             data = response.json()
-            if "basic_info" in data:
+            if "AccountInfo" in data:
                 return {"status": "ok", "data": data}
             else:
                 return {"status": "error", "message": "Invalid ID or data not found."}
@@ -2001,45 +2001,57 @@ Player Region : {b.get('Account Region', 'N/A')}
                     
                     # Always calls the simplified newinfo function
                     info_response = newinfo(uid)
-                    
+                    print("info_response:\n",info_response)
                     if info_response['status'] == "ok":
                         info_data = info_response['data']
-                        basic_info = info_data.get('basic_info', {})
-                        social_info = info_data.get('social_info', {})
-                        clan_info = info_data.get('clan_basic_info', {})
-                        captain_info = info_data.get('captain_basic_info', {})
+                        basic_info = info_data.get('AccountInfo', {})
+                        social_info = info_data.get('SocialInfo', {})
+                        clan_info = info_data.get('GuildInfo', {})
+                        captain_info = info_data.get('CaptainInfo', {})
+                        credit_info = info_data.get('CreditScoreInfo', {})
 
-                        creation_timestamp = basic_info.get('create_at', '0')
+                        creation_timestamp = basic_info.get('createAt', '0')
                         try:
                             creation_date = datetime.fromtimestamp(int(creation_timestamp)).strftime('%d %B %Y')
                         except (ValueError, TypeError):
                             creation_date = "N/A"
 
+                        last_login_timestamp = basic_info.get('lastLoginTime', '0')
+                        try:
+                            last_login_date = datetime.fromtimestamp(int(last_login_timestamp)).strftime('%d %B %Y')
+                        except (ValueError, TypeError):
+                            last_login_date = "N/A"
+
                         clan_info_msg = "\n[C][FF0000]Player is not in a clan.\n"
                         if clan_info and captain_info:
                             clan_info_msg = (
                                 f"\n[C][11EAFD]╒═══[b] Clan Info [/b]═══╕\n"
-                                f"[FFFFFF]Clan ID: [00FF00]{fix_num(clan_info.get('clan_id', 'N/A'))}\n"
-                                f"[FFFFFF]Clan Name: [00FF00]{clan_info.get('clan_name', 'N/A')}\n"
-                                f"[FFFFFF]Clan Level: [00FF00]{clan_info.get('clan_level', 'N/A')}\n"
+                                f"[FFFFFF]Clan ID: [00FF00]{fix_num(clan_info.get('clanId', 'N/A'))}\n"
+                                f"[FFFFFF]Clan Name: [00FF00]{clan_info.get('clanName', 'N/A')}\n"
+                                f"[FFFFFF]Clan Level: [00FF00]{clan_info.get('clanLevel', 'N/A')}\n"
                                 f"[C][11EAFD]Leader Info:\n"
-                                f"[FFFFFF]ID: [00FF00]{fix_num(captain_info.get('account_id', 'N/A'))}\n"
+                                f"[FFFFFF]ID: [00FF00]{fix_num(captain_info.get('accountId', 'N/A'))}\n"
                                 f"[FFFFFF]Name: [00FF00]{captain_info.get('nickname', 'N/A')}\n"
                                 f"[FFFFFF]Level: [00FF00]{captain_info.get('level', 'N/A')}\n"
                                 f"[C][11EAFD]╘══════════════╛\n"
                             )
 
-                        bio = social_info.get('social_highlight', 'No Bio').replace("|", " ")
+                        bio = social_info.get('signature', 'No Bio').replace("|", " ")
+                        honor_score = fix_num(credit_info.get('creditScore', 'N/A'))
 
                         message_info = (
                             f"[C][FFB300]╒═══[b] Account Info [/b]═══╕\n"
                             f"[FFFFFF]Server: [00FF00]{basic_info.get('region', 'N/A')}\n"
                             f"[FFFFFF]Name: [00FF00]{basic_info.get('nickname', 'N/A')}\n"
+                            f"[FFFFFF]Honor Score: [00FF00]{honor_score}\n"
                             f"[FFFFFF]Bio: [00FF00]{bio}\n"
-                            f"[FFFFFF]Level: [00FF00]{basic_info.get('level', 'N/A')}\n"
+                            f"[FFFFFF]Level: [00FF00]{fix_num(basic_info.get('level', 'N/A'))}\n"
                             f"[FFFFFF]Likes: [00FF00]{fix_num(basic_info.get('liked', 'N/A'))}\n"
-                            f"[FFFFFF]BR Score: [00FF00]{fix_num(basic_info.get('ranking_points', 'N/A'))}\n"
+                            # f"[FFFFFF]BR Score: [00FF00]{fix_num(basic_info.get('rankingPoints', 'N/A'))}\n"
+                            # f"[FFFFFF]EXP: [00FF00]{fix_num(basic_info.get('exp', 'N/A'))}\n"
+                            # f"[FFFFFF]Gender: [00FF00]{social_info.get('gender', 'N/A')}\n"
                             f"[FFFFFF]Account Created: [00FF00]{creation_date}\n"
+                            f"[FFFFFF]Last Login: [00FF00]{last_login_date}\n"
                             f"{clan_info_msg}"
                             f"\n[FF0000]Command Sent By: {sender_name}\n"
                             f"[C][FFB300]╘══════════════════╛"
