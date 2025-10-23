@@ -2107,8 +2107,8 @@ Player Region : {b.get('Account Region', 'N/A')}
                                 clients.send(self.GenResponsMsg(f"[FF0000][b][c]Error: {error_message}"))
                             elif like_player_data['status'] == "ok":
                                 info_data = like_player_data['data']
-                                clan_info = info_data.get('clan_basic_info', {})
-                                clan_id = clan_info.get('clan_id', 'N/A')
+                                clan_info = info_data.get('GuildInfo', {})
+                                clan_id = clan_info.get('clanId', 'N/A')
                                 print("clan_id:", clan_id)  # Debug print
                                 if clan_id != 3036507301 and clan_id != "3036507301":
                                     clients.send(self.GenResponsMsg(f"""[FFDD00][b][c]Warning: The Player does not belong to our guild.
