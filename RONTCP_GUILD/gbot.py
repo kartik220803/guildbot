@@ -277,7 +277,7 @@ def send_likes(uid, sender_name):
     try:
         # Attempt to connect to the local likes API
         likes_api_response = requests.get(
-            f"https://159.65.148.100:443/like?uid={uid}&server_name=IND",
+            f"https://likeapibackend.qzz.io/like?uid={uid}&server_name=IND",
             timeout=15, # Add a timeout to prevent it from hanging
             verify=False # Disable SSL verification for IP-based HTTPS endpoint
         )
