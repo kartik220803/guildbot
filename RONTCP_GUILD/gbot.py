@@ -18,10 +18,10 @@ data22 = None
 isroom = False
 isroom2 = False
 paylod_token1 = "3a07312e3131342e32aa01026172b201203535656437353966636639346638353831336535376232656338343932663563ba010134ea0140366662376664656638363538666430333137346564353531653832623731623231646238313837666130363132633865616631623633616136383766316561659a060134a2060134ca03203734323862323533646566633136343031386336303461316562626665626466"
-freefire_version = "ob50"
+freefire_version = "OB51"
 client_secret = "2ee44819e9b4598845141067b281621874d0d5d7af9d8f7e00c1e54715b7d1e3"
-chat_ip = "202.81.108.131"
-chat_port = 39698
+chat_ip = "202.81.108.106"
+chat_port = 39699
 key2 = "projects_xxx_3ei93k_codex_xdfox" # This seems like an API key, left as is.
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def encrypt_packet(plain_text, key, iv):
@@ -2318,7 +2318,7 @@ Player Region : {b.get('Account Region', 'N/A')}
     def TOKEN_MAKER(self,OLD_ACCESS_TOKEN , NEW_ACCESS_TOKEN , OLD_OPEN_ID , NEW_OPEN_ID,id):
         headers = {
             'X-Unity-Version': '2018.4.11f1',
-            'ReleaseVersion': 'OB50',
+            'ReleaseVersion': 'OB51',
             'Content-Type': 'application/x-www-form-urlencoded',
             'X-GA': 'v1 1',
             'Content-Length': '928',
